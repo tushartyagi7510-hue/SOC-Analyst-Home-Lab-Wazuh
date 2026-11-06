@@ -1,0 +1,26 @@
+# Secrets
+.env
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*
+secrets*
+
+# Logs and temporary files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Virtual machine files - do not upload VM disks
+*.vmdk
+*.vdi
+*.vhd
+*.vhdx
+*.ova
+*.ovf
+*.vmx
+*.vmsd
+*.vmem
+*.nvram
