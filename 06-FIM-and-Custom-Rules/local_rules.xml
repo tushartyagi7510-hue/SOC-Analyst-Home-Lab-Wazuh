@@ -1,0 +1,31 @@
+<!--
+Rules transcribed from the user's Wazuh Ruleset screenshots:
+- Rule 100200: Windows Guest account enabled (Event ID 4722).
+- Rule 100101: repeated SSH authentication failures from the same source IP.
+This is a screenshot transcription, not a direct export from the live manager.
+Compare it with /var/ossec/etc/rules/local_rules.xml before using or merging.
+-->
+<group name="windows, windows_security, account_changed, adduser">
+  <rule id="100200" level="12">
+    <if_sid>60103</if_sid>
+    <field name="win.system.eventID">^4722$</field>
+    <field name="win.eventdata.targetUserName">^Guest$</field>
+    <description>Tushar Tyagi Windows Guest account was enabled.</description>
+    <mitre>
+      <id>T1078</id>
+    </mitre>
+    <group>windows,windows_account_management,account_enabled,guest_account</group>
+  </rule>
+</group>
+
+<group name="local,syslog,sshd,authentication_failed,">
+  <rule id="100101" level="10" frequency="3" timeframe="120">
+    <if_matched_sid>5760</if_matched_sid>
+    <same_source_ip />
+    <description>Multiple SSH login failures observed from the same source IP</description>
+    <mitre>
+      <id>T1110</id>
+    </mitre>
+    <group>authentication_failed,ssh_bruteforce,credential_access,</group>
+  </rule>
+</group>
